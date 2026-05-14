@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { generateASDReport } from '../../utils/reportGenerator';
 import { Download } from 'lucide-react';
+import API_BASE_URL from '../../config';
+
 
 const AdvancedScreeningForm = () => {
     const { t } = useTranslation();
@@ -39,7 +41,7 @@ const AdvancedScreeningForm = () => {
         const fetchChildren = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get('http://localhost:5000/api/children', {
+                const res = await axios.get(`${API_BASE_URL}/children`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setChildren(res.data);
@@ -181,7 +183,7 @@ const AdvancedScreeningForm = () => {
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:5000/api/prediction/assess', { 
+            const response = await axios.post(`${API_BASE_URL}/prediction/assess`, { 
                 features: featureArray,
                 childId: selectedChildId 
             }, {

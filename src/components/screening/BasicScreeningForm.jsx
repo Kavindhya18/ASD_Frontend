@@ -3,6 +3,8 @@ import { Activity, CheckCircle2, Info, HelpCircle, X, AlertTriangle } from 'luci
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import API_BASE_URL from '../../config';
+
 
 const BasicScreeningForm = () => {
     const { t } = useTranslation();
@@ -90,7 +92,7 @@ const BasicScreeningForm = () => {
             ];
             
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:5000/api/prediction/assess/basic', { features: featuresArray }, {
+            const response = await axios.post(`${API_BASE_URL}/prediction/assess/basic`, { features: featuresArray }, {
                 headers: token ? { Authorization: `Bearer ${token}` } : {}
             });
             
